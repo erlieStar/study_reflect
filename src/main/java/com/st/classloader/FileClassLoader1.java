@@ -2,17 +2,15 @@ package com.st.classloader;
 
 import java.io.*;
 
-public class FileClassLoader extends ClassLoader {
+public class FileClassLoader1 extends ClassLoader {
 
-    // class文件的目录
     private String rootDir;
 
-    public FileClassLoader(String rootDir) {
+    public FileClassLoader1(String rootDir) {
         this.rootDir = rootDir;
     }
 
-    @Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
+    public Class<?> myLoadClass(String name) throws ClassNotFoundException {
         byte[] classData = getClassData(name);
         if (classData == null) {
             throw new ClassNotFoundException();
@@ -40,20 +38,4 @@ public class FileClassLoader extends ClassLoader {
         return null;
     }
 
-    public static void main(String[] args) {
-
-        String rootDir="E:\\Code\\study-java\\src\\main\\java";
-        FileClassLoader loader = new FileClassLoader(rootDir);
-
-        try {
-            // 传入class文件的全限定名
-            Class<?> clazz = loader.loadClass("com.st.classloader.DemoObj");
-            // com.st.classloader.FileClassLoader@7ea987ac
-            System.out.println(clazz.getClassLoader());
-            // I am DemoObj
-            System.out.println(clazz.newInstance().toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
