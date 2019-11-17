@@ -1,4 +1,4 @@
-package com.st.domain;
+package com.javashitang.domain;
 
 import lombok.Data;
 

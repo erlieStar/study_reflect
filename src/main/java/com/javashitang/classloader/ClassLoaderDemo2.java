@@ -1,4 +1,4 @@
-package com.st.classloader;
+package com.javashitang.classloader;
 
 public class ClassLoaderDemo2 {
 
@@ -6,9 +6,9 @@ public class ClassLoaderDemo2 {
         String rootDir="E:\\Code\\study-java\\src\\main\\java";
         FileClassLoader1 loader = new FileClassLoader1(rootDir);
 //        FileClassLoader loader = new FileClassLoader(rootDir);
-        Class<?> clazz = loader.myLoadClass("com.st.classloader.DemoObj");
-//        Class<?> clazz = loader.loadClass("com.st.classloader.DemoObj");
-        // com.st.classloader.FileClassLoader1@12a3a380
+        Class<?> clazz = loader.myLoadClass("com.javashitang.classloader.DemoObj");
+//        Class<?> clazz = loader.loadClass("com.javashitang.classloader.DemoObj");
+        // com.javashitang.classloader.FileClassLoader1@12a3a380
         System.out.println(clazz.getClassLoader());
         // sun.misc.Launcher$AppClassLoader@58644d46
         System.out.println(DemoObj.class.getClassLoader());

@@ -1,4 +1,4 @@
-package com.st.classloader;
+package com.javashitang.classloader;
 
 import java.io.*;
 
@@ -47,8 +47,8 @@ public class FileClassLoader extends ClassLoader {
 
         try {
             // 传入class文件的全限定名
-            Class<?> clazz = loader.loadClass("com.st.classloader.DemoObj");
-            // com.st.classloader.FileClassLoader@7ea987ac
+            Class<?> clazz = loader.loadClass("com.javashitang.classloader.DemoObj");
+            // com.javashitang.classloader.FileClassLoader@7ea987ac
             System.out.println(clazz.getClassLoader());
             // I am DemoObj
             System.out.println(clazz.newInstance().toString());

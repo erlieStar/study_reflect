@@ -1,4 +1,4 @@
-package com.st.classloader;
+package com.javashitang.classloader;
 
 public class DemoObj {
 

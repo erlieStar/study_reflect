@@ -1,4 +1,4 @@
-package com.st;
+package com.javashitang;
 
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ public class TestReflect {
     @Test
     public void test1() throws Exception {
 
-        Class<?> clazz  = Class.forName("com.st.domain.User");
+        Class<?> clazz  = Class.forName("com.javashitang.domain.User");
         Constructor constructor= clazz.getConstructor(String.class, String.class);
         Object classObject = constructor.newInstance("zhansan", "123");
         // User(username=zhansan, password=123)
