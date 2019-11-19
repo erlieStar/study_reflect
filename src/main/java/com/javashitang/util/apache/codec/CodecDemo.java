@@ -1,4 +1,4 @@
-package com.javashitang.util.codec;
+package com.javashitang.util.apache.codec;
 
 public class CodecDemo {
 

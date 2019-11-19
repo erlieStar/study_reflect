@@ -1,4 +1,4 @@
-package com.javashitang.util.collections;
+package com.javashitang.util.apache.collections;
 
 public class CollectionDemo {
 

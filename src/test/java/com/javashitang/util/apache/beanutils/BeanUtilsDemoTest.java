@@ -1,4 +1,4 @@
-package com.javashitang.util.beanutils;
+package com.javashitang.util.apache.beanutils;
 
 import com.javashitang.domain.User;
 import org.apache.commons.beanutils.BeanUtils;

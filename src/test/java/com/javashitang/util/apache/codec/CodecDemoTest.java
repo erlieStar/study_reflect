@@ -1,11 +1,8 @@
-package com.javashitang.util.codec;
+package com.javashitang.util.apache.codec;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.codec.net.URLCodec;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class CodecDemoTest {
 

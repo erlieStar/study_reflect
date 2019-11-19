@@ -1,13 +1,10 @@
-package com.javashitang.util.collections;
+package com.javashitang.util.apache.collections;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class CollectionDemoTest {
 

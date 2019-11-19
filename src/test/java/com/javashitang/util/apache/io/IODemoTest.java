@@ -1,16 +1,16 @@
-package com.javashitang.util.io;
+package com.javashitang.util.apache.io;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class IODemoTest {
 
@@ -29,6 +29,14 @@ public class IODemoTest {
 
     @Test
     public void test2() throws IOException {
+        // 拷贝流
+//        IOUtils.copy(InputStream input, OutputStream output);
+//        // 从流中读取内容，转为list
+//        List<String> line = IOUtils.readLines(InputStream input, Charset encoding);
+    }
+
+    @Test
+    public void test3() throws IOException {
     }
 
 }
