@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
-public class GuavaDemoTest {
+public class GuavaDemoTestService {
 
     @Test
     public void test1() {

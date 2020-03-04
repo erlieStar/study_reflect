@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class BeanUtilsDemoTest {
+public class BeanUtilsDemoTestService {
 
     // 对属性进行赋值
     @Test
@@ -23,8 +23,8 @@ public class BeanUtilsDemoTest {
     @Test
     public void test2() throws Exception{
         User user = new User();
-        user.setUsername("li");
-        user.setPassword("min");
+//        user.setUsername("li");
+//        user.setPassword("min");
         // bean->map
         Map<String, String> map = BeanUtils.describe(user);
         assertEquals("li", map.get("username"));

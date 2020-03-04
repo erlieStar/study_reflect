@@ -12,7 +12,7 @@ import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.List;
 
-public class IODemoTest {
+public class IODemoTestService {
 
     @Test
     public void test1() throws IOException {
