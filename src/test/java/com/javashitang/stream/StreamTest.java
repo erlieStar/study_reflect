@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -22,5 +23,41 @@ public class StreamTest {
         System.out.println(tempList2.size());
         Assert.assertEquals(tempList1.size(), 4);
         Assert.assertEquals(tempList2.size(), 0);
+    }
+
+    @Test
+    public void groupBy() {
+        List<Student> studentList = Lists.newArrayList();
+        Student student1 = Student.builder().name("学生1").age(10).build();
+        Student student2 = Student.builder().name("学生2").age(10).build();
+        Student student3 = Student.builder().name("学生3").age(20).build();
+        
+        studentList.add(student1);
+        studentList.add(student2);
+        studentList.add(student3);
+
+        Map<Integer, List<Student>> studentMap = 
+                studentList.stream().collect(Collectors.groupingBy(student -> {
+                    return student.getAge();
+                }));
+        for (Map.Entry<Integer, List<Student>> entry : studentMap.entrySet()) {
+            // 10
+            // 20
+            System.out.println(entry.getKey());
+        }
+    }
+
+    @Test
+    public void map() {
+        List<Student> studentList = Lists.newArrayList();
+        Student student1 = Student.builder().name("学生1").age(10).build();
+        Student student2 = Student.builder().name("学生2").age(10).build();
+        Student student3 = Student.builder().name("学生3").age(20).build();
+
+        studentList.add(student1);
+        studentList.add(student2);
+        studentList.add(student3);
+        Map<String, Student> studentMap = studentList.stream().collect(Collectors.toMap(Student::getName, student -> student));
+        System.out.println(studentMap);
     }
 }
