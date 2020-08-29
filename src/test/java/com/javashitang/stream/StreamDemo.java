@@ -1,10 +1,16 @@
 package com.javashitang.stream;
 
 import com.google.common.collect.Lists;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StreamDemo {
@@ -54,6 +60,20 @@ public class StreamDemo {
     }
 
     @Test
+    public void min() {
+        List<Integer> list = Arrays.asList(1, 2, 3);
+        // 1
+        System.out.println(list.stream().min((x, y) -> x - y).get());
+    }
+
+    @Test
+    public void max() {
+        List<Integer> list = Arrays.asList(1, 2, 3);
+        // 3
+        System.out.println(list.stream().max((x, y) -> x - y).get());
+    }
+
+    @Test
     public void reduceCase1() {
 
     }
@@ -61,5 +81,56 @@ public class StreamDemo {
     @Test
     public void reduceCase2() {
 
+    }
+
+    @Data
+    @AllArgsConstructor
+    public class Student {
+        private String name;
+        private int age;
+    }
+
+    List<Student> studentList = Arrays.asList(new Student("张三", 30),
+            new Student("李四", 20),
+            new Student("王五", 20));
+
+    @Test
+    public void collectCase1() {
+        List<String> nameList = studentList.stream().map(Student::getName).collect(Collectors.toList());
+        // [张三, 李四, 王五]
+        System.out.println(nameList);
+
+        Set<Integer> ageSet = studentList.stream().map(Student::getAge).collect(Collectors.toSet());
+        // [20, 30]
+        System.out.println(ageSet);
+
+        LinkedHashSet<Integer> linkedHashSet =
+                studentList.stream().map(Student::getAge).collect(Collectors.toCollection(LinkedHashSet::new));
+        // [30, 20]
+        System.out.println(linkedHashSet);
+    }
+
+
+    @Test
+    public void collectCase2() {
+        // 总数
+        long count = studentList.stream().collect(Collectors.counting());
+        // 3
+        System.out.println(count);
+
+        // 平均值
+        double ageAvg = studentList.stream().collect(Collectors.averagingDouble(Student::getAge));
+        // 23.3
+        System.out.println(ageAvg);
+
+        // 总和
+        int totalAge = studentList.stream().collect(Collectors.summingInt(Student::getAge));
+        // 70
+        System.out.println(totalAge);
+
+        // 最大值
+        Optional<Student> student = studentList.stream().collect(Collectors.maxBy((x, y) -> x.getAge() - y.getAge()));
+        // Student(name=张三, age=30)
+        System.out.println(student.get());
     }
 }
