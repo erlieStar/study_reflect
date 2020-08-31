@@ -50,13 +50,11 @@ public class StreamTest {
     @Test
     public void map() {
         List<Student> studentList = Lists.newArrayList();
-        Student student1 = Student.builder().name("学生1").age(10).build();
-        Student student2 = Student.builder().name("学生2").age(10).build();
-        Student student3 = Student.builder().name("学生3").age(20).build();
-
-        studentList.add(student1);
-        studentList.add(student2);
-        studentList.add(student3);
+        for (int i = 0; i < 3; i++) {
+            Student student = Student.builder().name("学生" + i).age(i).build();
+            studentList.add(student);
+        }
+        // {学生0=Student(name=学生0, age=0), 学生2=Student(name=学生2, age=2), 学生1=Student(name=学生1, age=1)}
         Map<String, Student> studentMap = studentList.stream().collect(Collectors.toMap(Student::getName, student -> student));
         System.out.println(studentMap);
     }

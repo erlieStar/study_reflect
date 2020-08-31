@@ -221,4 +221,34 @@ public class StreamDemo {
         // 10
         System.out.println(sum);
     }
+
+    public enum MSG_TYPE {
+
+        IMAGE((byte) 0, "图片"),
+        TEXT((byte) 1, "文本");
+
+        public final byte value;
+        public final String name;
+
+        MSG_TYPE(byte value, String name) {
+            this.value = value;
+            this.name = name;
+        }
+    }
+
+    @Test
+    public void useCase1() {
+        // 模拟前端传入的参数为1
+        boolean isExist = Arrays.stream(MSG_TYPE.values()).anyMatch(v -> v.value == 1);
+        // true
+        System.out.println(isExist);
+        isExist = Arrays.stream(MSG_TYPE.values()).anyMatch(v -> v.value == 5);
+        // false
+        System.out.println(isExist);
+    }
+
+    @Test
+    public void useCase2() {
+
+    }
 }

@@ -178,4 +178,17 @@ public class CompletableFutureDemo {
         CompletableFuture.supplyAsync(() -> "hello")
                 .thenApply(s -> s + " world").whenComplete((result, throwable) -> System.out.println(result));
     }
+
+    @Test
+    public void test15() {
+        CompletableFuture.supplyAsync(() -> "hello")
+                .thenApply(s -> {
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return s + " world";})
+                .whenComplete((result, throwable) -> System.out.println(result));
+    }
 }
