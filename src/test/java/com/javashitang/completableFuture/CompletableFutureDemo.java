@@ -19,12 +19,72 @@ public class CompletableFutureDemo {
         CompletableFuture<Void> voidFuture = CompletableFuture.runAsync(() -> System.out.println("hello"));
         // null
         System.out.println(voidFuture.get());
-
         CompletableFuture<String> stringFuture = CompletableFuture.supplyAsync(() -> "hello");
-        // end
+        // hello
         System.out.println(stringFuture.get());
     }
 
+    @Test
+    public void whenComplete() throws Exception {
+        CompletableFuture future = CompletableFuture.supplyAsync(() -> {
+            return "hello";
+        }).whenComplete((v, e) -> {
+            // hello
+            System.out.println(v);
+        });
+        // hello
+        System.out.println(future.get());
+    }
+
+    @Test
+    public void allOf() throws InterruptedException {
+        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
+            sleepRandom();
+            return "欢迎关注";
+        });
+        CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> {
+            sleepRandom();
+            return "微信公众号";
+        });
+        CompletableFuture<String> future3 = CompletableFuture.supplyAsync(() -> {
+            sleepRandom();
+            return "Java识堂";
+        });
+        // 欢迎关注 微信公众号 Java识堂
+        CompletableFuture.allOf(future1, future2, future3)
+                .thenApply(v ->
+                        Stream.of(future1, future2, future3)
+                                .map(CompletableFuture::join)
+                                .collect(Collectors.joining(" ")))
+                .thenAccept(System.out::print);
+    }
+
+    @Test
+    public void anyOf() throws Exception {
+        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
+            sleepRandom();
+            return "欢迎关注";
+        });
+        CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> {
+            sleepRandom();
+            return "微信公众号";
+        });
+        CompletableFuture<String> future3 = CompletableFuture.supplyAsync(() -> {
+            sleepRandom();
+            return "Java识堂";
+        });
+        CompletableFuture<Object> resultFuture = CompletableFuture.anyOf(future1, future2, future3);
+        System.out.println(resultFuture.get());
+    }
+
+    public void sleepRandom() {
+        Random random = new Random(5);
+        try {
+            TimeUnit.SECONDS.sleep(random.nextInt());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void test2() throws Exception {
