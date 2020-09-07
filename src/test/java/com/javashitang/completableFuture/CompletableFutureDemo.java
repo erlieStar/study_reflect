@@ -65,11 +65,10 @@ public class CompletableFutureDemo {
         CompletableFuture future2 = CompletableFuture.supplyAsync(() -> {
             sleepRandom();
             return "Java识堂";
-        }).applyToEither(future1, str -> {
-            return str;
-        }).whenComplete((t, e) -> {
-            System.out.println(t);
         });
+        CompletableFuture future = future1.applyToEither(future2, str -> str);
+        // 欢迎关注微信公众号 Java识堂 随机输出
+        System.out.println(future.get());
     }
 
     @Test
@@ -289,14 +288,44 @@ public class CompletableFutureDemo {
     }
 
     @Test
+    public void thenApply() {
+        CompletableFuture.supplyAsync(() -> {
+            return "hello ";
+        }).thenAccept(str -> {
+            // hello world
+            System.out.println(str + "world");
+        }).thenRun(() -> {
+            // task finish
+            System.out.println("task finish");
+        });
+    }
+
+    @Test
     public void exception() throws Exception {
         CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
             return 100 / 0;
+        }).thenApply(num -> {
+            return num + 10;
         }).exceptionally(throwable -> {
             return 0;
         });
-        Integer num = future.get();
         // 0
-        System.out.println(num);
+        System.out.println(future.get());
+    }
+
+    @Test
+    public void test110() throws Exception {
+        CompletableFuture future = CompletableFuture.supplyAsync(() -> {
+            String str = null;
+            return str.length();
+        }).whenComplete((v, e) -> {
+            if (e == null) {
+                System.out.println("正常结果为" + v);
+            } else {
+                // 发生异常了java.util.concurrent.CompletionException: java.lang.NullPointerException
+                System.out.println("发生异常了" + e.toString());
+            }
+        });
+        System.out.println(future.get());
     }
 }
