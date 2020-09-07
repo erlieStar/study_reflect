@@ -15,10 +15,15 @@ import java.util.stream.Stream;
 public class CompletableFutureDemo {
 
     @Test
-    public void test1() throws Exception {
+    public void create() throws Exception {
+        CompletableFuture<Integer> intFuture = CompletableFuture.completedFuture(100);
+        // 100
+        System.out.println(intFuture.get());
+
         CompletableFuture<Void> voidFuture = CompletableFuture.runAsync(() -> System.out.println("hello"));
         // null
         System.out.println(voidFuture.get());
+
         CompletableFuture<String> stringFuture = CompletableFuture.supplyAsync(() -> "hello");
         // hello
         System.out.println(stringFuture.get());
@@ -34,6 +39,37 @@ public class CompletableFutureDemo {
         });
         // hello
         System.out.println(future.get());
+    }
+
+
+    @Test
+    public void thenCombine() throws Exception {
+        CompletableFuture future = CompletableFuture.supplyAsync(() -> {
+            return "欢迎关注 ";
+        }).thenApply(t -> {
+            return t + "微信公众号 ";
+        }).thenCombine(CompletableFuture.completedFuture("Java识堂"), (t, u) -> {
+            return t + u;
+        }).whenComplete((t, e) -> {
+            // 欢迎关注 微信公众号 Java识堂
+            System.out.println(t);
+        });
+    }
+
+    @Test
+    public void applyToEither() throws Exception {
+        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
+            sleepRandom();
+            return "欢迎关注微信公众号";
+        });
+        CompletableFuture future2 = CompletableFuture.supplyAsync(() -> {
+            sleepRandom();
+            return "Java识堂";
+        }).applyToEither(future1, str -> {
+            return str;
+        }).whenComplete((t, e) -> {
+            System.out.println(t);
+        });
     }
 
     @Test
@@ -250,5 +286,17 @@ public class CompletableFutureDemo {
                     }
                     return s + " world";})
                 .whenComplete((result, throwable) -> System.out.println(result));
+    }
+
+    @Test
+    public void exception() throws Exception {
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
+            return 100 / 0;
+        }).exceptionally(throwable -> {
+            return 0;
+        });
+        Integer num = future.get();
+        // 0
+        System.out.println(num);
     }
 }
