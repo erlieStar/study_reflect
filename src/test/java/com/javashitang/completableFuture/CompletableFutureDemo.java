@@ -328,4 +328,38 @@ public class CompletableFutureDemo {
         });
         System.out.println(future.get());
     }
+
+    public static void main(String[] args) {
+        /**
+         * ForkJoinPool.commonPool-worker-1 在路上耗时4秒
+         * ForkJoinPool.commonPool-worker-2 在路上耗时3秒
+         * ForkJoinPool.commonPool-worker-1 到达车站了
+         * ForkJoinPool.commonPool-worker-2 到达车站了
+         * 老司机，发车
+         */
+        Random random = new Random();
+        CompletableFuture future1 = CompletableFuture.runAsync(() -> {
+            int time = random.nextInt(5);
+            System.out.println(Thread.currentThread().getName() + " 在路上耗时" + time + "秒");
+            try {
+                TimeUnit.SECONDS.sleep(random.nextInt());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + " 到达车站了");
+        });
+        CompletableFuture future2 = CompletableFuture.runAsync(() -> {
+            int time = random.nextInt(5);
+            System.out.println(Thread.currentThread().getName() + " 在路上耗时" + time + "秒");
+            try {
+                TimeUnit.SECONDS.sleep(random.nextInt());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + " 到达车站了");
+        });
+        CompletableFuture.allOf(future1, future2).thenRun(() -> {
+            System.out.println("老司机，发车");
+        });
+    }
 }
