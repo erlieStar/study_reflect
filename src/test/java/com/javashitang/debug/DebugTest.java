@@ -63,4 +63,19 @@ public class DebugTest {
 
     }
 
+    @Test
+    public void back() {
+        int sum = 10;
+        method1(10);
+    }
+
+    public void method1(int sum) {
+        sum += 10;
+        method2(10);
+    }
+
+    public void method2(int sum) {
+        sum += 10;
+    }
+
 }
