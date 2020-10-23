@@ -31,6 +31,7 @@ public class GuavaDemoTestService {
 
     @Test
     public void test2() {
+        // 类似与Map<String, List<Integer>> map
         Multimap<String, Integer> map = ArrayListMultimap.create();
         map.put("key1", 1);
         map.put("key1", 2);

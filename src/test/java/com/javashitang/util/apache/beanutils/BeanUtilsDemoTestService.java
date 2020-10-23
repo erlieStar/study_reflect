@@ -23,8 +23,8 @@ public class BeanUtilsDemoTestService {
     @Test
     public void test2() throws Exception{
         User user = new User();
-//        user.setUsername("li");
-//        user.setPassword("min");
+        user.setUsername("li");
+        user.setPassword("min");
         // bean->map
         Map<String, String> map = BeanUtils.describe(user);
         assertEquals("li", map.get("username"));
