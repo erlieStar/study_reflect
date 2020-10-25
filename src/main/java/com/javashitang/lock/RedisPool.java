@@ -27,7 +27,7 @@ public class RedisPool {
         config.setBlockWhenExhausted(true);
 
         //超时时间是2秒
-        pool = new JedisPool(config, "", 6379, 1000 * 2);
+        pool = new JedisPool(config, "myhost", 6379, 1000 * 2);
 
     }
 
