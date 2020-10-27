@@ -7,11 +7,11 @@ import com.alibaba.excel.event.AnalysisEventListener;
  * @author lilimin
  * @since 2020-10-19
  */
-public class DemoDataListener extends AnalysisEventListener<DemoData> {
+public class UserInfoDataListener extends AnalysisEventListener<UserInfo> {
 
     @Override
-    public void invoke(DemoData demoData, AnalysisContext analysisContext) {
-
+    public void invoke(UserInfo userInfo, AnalysisContext analysisContext) {
+        System.out.println(userInfo);
     }
 
     @Override
