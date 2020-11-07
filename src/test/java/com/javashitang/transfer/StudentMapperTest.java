@@ -9,6 +9,9 @@ import static org.junit.Assert.*;
 
 public class StudentMapperTest {
 
+    /**
+     * 对象互转
+     */
     @Test
     public void studentPo2Vo() {
         StudentPO studentPO = StudentPO.builder().id(10).name("test")
@@ -19,6 +22,9 @@ public class StudentMapperTest {
     }
 
 
+    /**
+     * List互转
+     */
     @Test
     public void poList2VoList() {
         List<StudentPO> studentPOList = new ArrayList<>();
@@ -32,6 +38,9 @@ public class StudentMapperTest {
         System.out.println(studentVOList);
     }
 
+    /**
+     * 多个对象映射一个对象
+     */
     @Test
     public void mergeVo() {
         SchoolPO schoolPO = SchoolPO.builder().name("学校名字").build();
@@ -39,5 +48,16 @@ public class StudentMapperTest {
         SchoolStudentVO schoolStudentVO = StudentMapper.INSTANCE.mergeVo(schoolPO, studentPO);
         // SchoolStudentVO(schoolName=学校名字, studentName=学生名字)
         System.out.println(schoolStudentVO);
+    }
+
+    /**
+     * 转换的时候指定方法
+     */
+    @Test
+    public void specifyMethod() {
+        PersonVO personVO = PersonVO.builder().age(10).gender(GenderEnum.MALE).build();
+        PersonPO personPO = StudentMapper.INSTANCE.vo2Po(personVO);
+        // PersonPO(age=10, gender=1)
+        System.out.println(personPO);
     }
 }

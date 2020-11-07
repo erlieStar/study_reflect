@@ -3,6 +3,7 @@ package com.javashitang.transfer;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -25,4 +26,15 @@ public interface StudentMapper {
             @Mapping(source = "studentPO.name", target = "studentName")
     })
     SchoolStudentVO mergeVo(SchoolPO schoolPO, StudentPO studentPO);
+
+    @Mappings({
+            @Mapping(source = "gender", target = "gender", qualifiedByName = "convertGender"),
+    })
+    PersonPO vo2Po(PersonVO personVO);
+
+    @Named("convertGender")
+    default Integer convertTargetType(GenderEnum genderEnum) {
+        return genderEnum.getValue();
+    }
+
 }
