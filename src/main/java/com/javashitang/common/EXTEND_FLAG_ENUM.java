@@ -6,9 +6,13 @@ package com.javashitang.common;
  */
 public enum EXTEND_FLAG_ENUM {
 
+    // 0001
     OVER_WEIGHT(1, "超重"),
+    // 0010
     OVER_CUBAGE(1 << 1, "超方"),
+    // 0100
     LATE(1 << 2, "晚点"),
+    // 1000
     SLOW(1 << 3, "缓行");
 
     public int value;
