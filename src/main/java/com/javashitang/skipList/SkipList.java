@@ -7,8 +7,10 @@ package com.javashitang.skipList;
 public class SkipList {
 
     private static final float SKIPLIST_P = 0.5f;
+    // 最高层数为16
     private static final int MAX_LEVEL = 16;
 
+    // 目前的层数
     private int levelCount = 1;
 
     private Node head = new Node();  // 带头链表
@@ -55,6 +57,7 @@ public class SkipList {
         }
 
         // update node hight
+        // 更新目前的层数
         if (levelCount < level) levelCount = level;
     }
 
@@ -85,9 +88,10 @@ public class SkipList {
     // 理论来讲，一级索引中元素个数应该占原始数据的 50%，二级索引中元素个数占 25%，三级索引12.5% ，一直到最顶层。
     // 因为这里每一层的晋升概率是 50%。对于每一个新插入的节点，都需要调用 randomLevel 生成一个合理的层数。
     // 该 randomLevel 方法会随机生成 1~MAX_LEVEL 之间的数，且 ：
-    //        50%的概率返回 1
-    //        25%的概率返回 2
-    //      12.5%的概率返回 3 ...
+    // 50%的概率返回 1
+    // 25%的概率返回 2
+    // 12.5%的概率返回 3 ...
+    // Math.random()返回的值为[0, 1)
     private int randomLevel() {
         int level = 1;
 
