@@ -37,15 +37,16 @@ public class MyLruCache<K, V> {
             map.get(key).value = value;
             return;
         }
+
+        // 如果超出容量，把头去掉
+        if (map.size() == capacity) {
+            ListNode listNode = doubleList.removeFirst();
+            map.remove(listNode.key);
+        }
+
         // 若不存在，new一个出来
         ListNode node = new ListNode(key, value);
         map.put(key, node);
         doubleList.addLast(node);
-
-        // 如果超出容量，把头去掉
-        if (map.size() > capacity) {
-            ListNode listNode = doubleList.removeFirst();
-            map.remove(listNode.key);
-        }
     }
 }
