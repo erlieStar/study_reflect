@@ -11,17 +11,13 @@ import java.util.Map;
 public class MyLruCache<K, V> {
 
     private int capacity;
+    private DoubleList doubleList;
     private Map<K, ListNode> map;
-    private ListNode head;
-    private ListNode tail;
 
     public MyLruCache(int capacity) {
         this.capacity = capacity;
         map = new HashMap<>();
-        head = new ListNode();
-        tail = new ListNode();
-        head.next = tail;
-        tail.pre = head;
+        doubleList = new DoubleList();
     }
 
     public V get(Object key) {
@@ -30,9 +26,8 @@ public class MyLruCache<K, V> {
             return null;
         }
         // 先删除该节点，再接到尾部
-        node.pre.next = node.next;
-        node.next.pre = node.pre;
-        moveToTail(node);
+        doubleList.remove(node);
+        doubleList.addLast(node);
         return node.value;
     }
 
@@ -45,35 +40,11 @@ public class MyLruCache<K, V> {
         // 若不存在，new一个出来，如果超出容量，把头去掉
         ListNode node = new ListNode(key, value);
         map.put(key, node);
-        moveToTail(node);
+        doubleList.addLast(node);
 
         if (map.size() > capacity) {
-            map.remove(head.next.key);
-            head.next = head.next.next;
-            head.next.pre = head;
-        }
-    }
-
-    // 把节点移动到尾巴
-    private void moveToTail(ListNode node) {
-        node.pre = tail.pre;
-        tail.pre = node;
-        node.pre.next = node;
-        node.next = tail;
-    }
-
-    // 定义双向链表节点
-    private class ListNode<K, V> {
-        K key;
-        V value;
-        ListNode pre;
-        ListNode next;
-
-        public ListNode() {}
-
-        public ListNode(K key, V value) {
-            this.key = key;
-            this.value = value;
+            ListNode listNode = doubleList.removeFirst();
+            map.remove(listNode);
         }
     }
 }
