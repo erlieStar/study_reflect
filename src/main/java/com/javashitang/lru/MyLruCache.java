@@ -44,7 +44,7 @@ public class MyLruCache<K, V> {
 
         if (map.size() > capacity) {
             ListNode listNode = doubleList.removeFirst();
-            map.remove(listNode);
+            map.remove(listNode.key);
         }
     }
 }
