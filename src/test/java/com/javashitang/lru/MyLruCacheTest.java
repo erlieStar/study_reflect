@@ -17,5 +17,7 @@ public class MyLruCacheTest {
         myLruCache.put("3", "3");
         myLruCache.put("4", "4");
         myLruCache.put("2", "2");
+        myLruCache.put("1", "1");
+        System.out.println();
     }
 }
