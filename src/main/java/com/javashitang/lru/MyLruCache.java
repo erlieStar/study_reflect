@@ -20,7 +20,7 @@ public class MyLruCache<K, V> {
         doubleList = new DoubleList();
     }
 
-    public V get(Object key) {
+    public V get(K key) {
         ListNode<K, V> node = map.get(key);
         if (node == null) {
             return null;
@@ -39,7 +39,7 @@ public class MyLruCache<K, V> {
         }
 
         // 如果超出容量，把头去掉
-        if (map.size() == capacity) {
+        if (map.size() >= capacity) {
             ListNode listNode = doubleList.removeFirst();
             map.remove(listNode.key);
         }
