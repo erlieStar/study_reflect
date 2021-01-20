@@ -49,7 +49,16 @@ public class LfuCache<K, V> {
 
     // 删除出现频率最低的key
     private void removeMinFreqKey() {
-
+        LinkedHashSet<K> keyList = freqTokeys.get(minFreq);
+        K deleteKey = keyList.iterator().next();
+        keyList.remove(deleteKey);
+        if (keyList.isEmpty()) {
+            // 这里删除元素后不需要重新设置minFreq
+            // 因为put方法执行完会将minFreq设置为1
+            freqTokeys.remove(keyList);
+        }
+        keyToVal.remove(deleteKey);
+        keyToFreq.remove(deleteKey);
     }
 
     // 增加频率
@@ -61,6 +70,7 @@ public class LfuCache<K, V> {
         freqTokeys.get(freq + 1).add(key);
         if (freqTokeys.get(key).isEmpty()) {
             freqTokeys.remove(freq);
+            // 删除后链表为空，需要更新最小频率
             if (freq == this.minFreq) {
                 this.minFreq++;
             }
