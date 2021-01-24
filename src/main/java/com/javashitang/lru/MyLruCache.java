@@ -49,4 +49,9 @@ public class MyLruCache<K, V> {
         map.put(key, node);
         doubleList.addLast(node);
     }
+
+    @Override
+    public String toString() {
+        return doubleList.toString();
+    }
 }

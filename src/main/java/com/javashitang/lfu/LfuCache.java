@@ -16,6 +16,14 @@ public class LfuCache<K, V> {
     private int minFreq;
     private int capacity;
 
+    public LfuCache(int capacity) {
+        keyToVal = new HashMap<>();
+        keyToFreq = new HashMap<>();
+        freqTokeys = new HashMap<>();
+        this.capacity = capacity;
+        this.minFreq = 0;
+    }
+
     public V get(K key) {
         V v = keyToVal.get(key);
         if (v == null) {
@@ -68,9 +76,10 @@ public class LfuCache<K, V> {
         freqTokeys.get(freq).remove(key);
         freqTokeys.putIfAbsent(freq + 1, new LinkedHashSet<>());
         freqTokeys.get(freq + 1).add(key);
-        if (freqTokeys.get(key).isEmpty()) {
+        if (freqTokeys.get(freq).isEmpty()) {
             freqTokeys.remove(freq);
-            // 删除后链表为空，需要更新最小频率
+            // 最小频率的set为空，key被移动到minFreq+1对应的set了
+            // 所以minFreq也要加1
             if (freq == this.minFreq) {
                 this.minFreq++;
             }

@@ -36,4 +36,20 @@ public class DoubleList {
         remove(first);
         return first;
     }
+
+    @Override
+    public String toString() {
+        ListNode tempHead = head;
+        ListNode tempTail = tail;
+        String str = "";
+        while (tempHead.next != null) {
+            tempHead = tempHead.next;
+            if (tempHead != tempTail) {
+                Object key = tempHead.key;
+                Object value = tempHead.value;
+                str += "{" + key + " : " + value + "}";
+            }
+        }
+        return str;
+    }
 }
