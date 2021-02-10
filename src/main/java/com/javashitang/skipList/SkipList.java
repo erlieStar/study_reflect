@@ -6,6 +6,8 @@ package com.javashitang.skipList;
  */
 public class SkipList {
 
+    // 大概每隔多少个节点向上提取一层的比例
+    // 1/2为大概每隔2个节点向上提取一层，1/4为每隔4个节点向上提取一层
     private static final float SKIPLIST_P = 0.5f;
     // 最高层数为16
     private static final int MAX_LEVEL = 16;
