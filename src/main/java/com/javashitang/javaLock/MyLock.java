@@ -13,6 +13,7 @@ import java.util.concurrent.locks.LockSupport;
  */
 public class MyLock {
 
+    // 0表示锁没有被获取，1表示锁被获取
     private volatile int state;
     // 这里应该用并发安全的容器，这里只是举例
     private List<Thread> threadList = new ArrayList<>();
