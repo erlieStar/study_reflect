@@ -44,6 +44,7 @@ public class MyLock {
 
     private void park() {
         threadList.add(Thread.currentThread());
+        // 阻塞线程
         LockSupport.park(Thread.currentThread());
     }
 
@@ -51,6 +52,7 @@ public class MyLock {
         if (!threadList.isEmpty()) {
             Thread thread = threadList.get(0);
             System.out.println(thread.getName());
+            // 唤醒线程
             LockSupport.unpark(thread);
         }
     }
