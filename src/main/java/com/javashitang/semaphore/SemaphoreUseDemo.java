@@ -19,15 +19,22 @@ public class SemaphoreUseDemo {
             Runnable runnable = () -> {
                 try {
                     semaphore.acquire();
-                    System.out.println("no " + num + " access");
-                    TimeUnit.SECONDS.sleep((long) Math.random() * 5);
-                    semaphore.release();
-                    System.out.println("----" + semaphore.availablePermits());
+                    System.out.println("no " + num + " check");
+                    TimeUnit.SECONDS.sleep((long) Math.random() * 200);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                } finally {
+                    semaphore.release();
+                    System.out.println("---- " + "no " + num + " finish");
                 }
             };
             service.execute(runnable);
+        }
+        // 让主线程等待子线程
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         service.shutdownNow();
     }

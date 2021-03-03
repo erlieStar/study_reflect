@@ -35,7 +35,7 @@ public class BeanDefinitionReader {
                 if (beanClass.isInterface()) {
                     continue;
                 }
-                BeanDefinition beanDefinition = doCreateBeanDefinition(beanClass.getSimpleName(), beanClass.getName())
+                BeanDefinition beanDefinition = doCreateBeanDefinition(beanClass.getSimpleName(), beanClass.getName());
                 beanDefinitionList.add(beanDefinition);
             }
         } catch (Exception e) {
