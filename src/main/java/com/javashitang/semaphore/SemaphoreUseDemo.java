@@ -30,12 +30,5 @@ public class SemaphoreUseDemo {
             };
             service.execute(runnable);
         }
-        // 让主线程等待子线程
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        service.shutdownNow();
     }
 }
