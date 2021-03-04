@@ -10,18 +10,18 @@ import java.util.concurrent.*;
 public class CyclicBarrierUseCase1 {
 
     public static void main(String[] args) {
-        CyclicBarrier barrier = new CyclicBarrier(4);
+        CyclicBarrier barrier = new CyclicBarrier(3);
         ExecutorService service = Executors.newCachedThreadPool();
         Random random = new Random();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 6; i++) {
             int num = i;
             service.submit(() -> {
                 try {
-                    System.out.println(num + " 准备去麻将馆");
+                    System.out.println(num + " 准备去棋牌馆");
                     TimeUnit.SECONDS.sleep(random.nextInt(5));
-                    System.out.println(num + " 到达麻将馆");
+                    System.out.println(num + " 到达");
                     barrier.await();
-                    System.out.println(num + " 开始打");
+                    System.out.println(num + " 斗地主");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
