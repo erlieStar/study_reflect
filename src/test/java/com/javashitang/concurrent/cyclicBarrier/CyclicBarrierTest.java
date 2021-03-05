@@ -51,7 +51,7 @@ public class CyclicBarrierTest {
 
 
     @Test
-    public void test2() throws InterruptedException {
+    public void test3() throws InterruptedException {
         CyclicBarrier barrier =
                 new CyclicBarrier(4, () -> System.out.println("凑够人了"));
         for (int i = 0; i < 3; i++) {
@@ -62,6 +62,27 @@ public class CyclicBarrierTest {
         TimeUnit.SECONDS.sleep(1);
         thread.interrupt();
         TimeUnit.SECONDS.sleep(5);
+        for (int i = 0; i < 3; i++) {
+            new MyThread(i, barrier).start();
+        }
+        thread = new MyThread(3, barrier);
+        thread.start();
+        TimeUnit.SECONDS.sleep(5);
+    }
+
+    @Test
+    public void test6() throws InterruptedException {
+        CyclicBarrier barrier =
+                new CyclicBarrier(4, () -> System.out.println("凑够人了"));
+        for (int i = 0; i < 3; i++) {
+            new MyThread(i, barrier).start();
+        }
+        Thread thread = new MyThread(3, barrier);
+        thread.start();
+        TimeUnit.SECONDS.sleep(1);
+        thread.interrupt();
+        TimeUnit.SECONDS.sleep(5);
+        barrier.reset();
         for (int i = 0; i < 3; i++) {
             new MyThread(i, barrier).start();
         }
