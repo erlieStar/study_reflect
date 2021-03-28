@@ -12,8 +12,10 @@ public class TestInterfaceTest {
 
     @Test
     public void doSomething() {
+        // doSomething
+        // real
         TestInterface testInterface = getInterface();
-        System.out.println("---");
+        System.out.println("doSomething");
         testInterface.doSomething();
     }
 
@@ -22,6 +24,6 @@ public class TestInterfaceTest {
     }
 
     private void real() {
-        System.out.println("a");
+        System.out.println("real");
     }
 }
