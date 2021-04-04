@@ -48,4 +48,12 @@ public class ReflectTest {
         String tip = (String)privateMethod.invoke(book);
         System.out.println(tip);
     }
+
+    @Test
+    public void isInstanceApi() {
+        Book book = new Book();
+        if (Book.class.isInstance(book)) {
+            System.out.println("yes");
+        }
+    }
 }
