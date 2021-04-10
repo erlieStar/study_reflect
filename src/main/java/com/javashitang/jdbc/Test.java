@@ -12,11 +12,11 @@ public class Test {
             e.printStackTrace();
         }
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://myhost/test?useUnicode=true&characterEncoding=utf-8&useSSL=false", "test", "test");
+            conn = DriverManager.getConnection("jdbc:mysql://www.javashitang.com/test?useUnicode=true&characterEncoding=utf-8&useSSL=false", "test", "test");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String sql = "select id,name,email from customertbl";
+        String sql = "select id, name, email from customertbl";
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
