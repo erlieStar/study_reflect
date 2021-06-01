@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -327,6 +328,15 @@ public class CompletableFutureDemo {
             }
         });
         System.out.println(future.get());
+    }
+
+
+    @Test
+    public void completeExceptionally() throws ExecutionException, InterruptedException {
+        CompletableFuture future = new CompletableFuture();
+        future.completeExceptionally(new RuntimeException());
+        // 抛出异常 java.util.concurrent.ExecutionException: java.lang.RuntimeException
+        Object object = future.get();
     }
 
     public static void main(String[] args) {
