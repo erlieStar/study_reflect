@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  * @since 2021-03-13
  *
  * 打印gc日志的参数
- * -Xms100m -Xmx100m -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -Xloggc:./gc.log
+ * -Xms20m -Xmx20m -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -Xloggc:./gc.log
  *
  * 内存溢出的参数
  * -Xmx30m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/Users/peng
