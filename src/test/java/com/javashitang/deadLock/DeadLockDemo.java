@@ -42,6 +42,8 @@ public class DeadLockDemo {
             }
         });
 
+        threadA.setName("myThreadA");
+        threadB.setName("myThreadB");
         threadA.start();
         threadB.start();
     }
