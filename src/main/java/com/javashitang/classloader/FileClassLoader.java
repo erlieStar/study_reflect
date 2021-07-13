@@ -42,13 +42,13 @@ public class FileClassLoader extends ClassLoader {
 
     public static void main(String[] args) {
 
-        String rootDir="E:\\Code\\study-java\\src\\main\\java";
+        String rootDir="/Users/peng/study-code/java-learning/src/main/java";
         FileClassLoader loader = new FileClassLoader(rootDir);
 
         try {
             // 传入class文件的全限定名
             Class<?> clazz = loader.loadClass("com.javashitang.classloader.DemoObj");
-            // com.javashitang.classloader.FileClassLoader@7ea987ac
+            // com.javashitang.classloader.FileClassLoader@1b28cdfa
             System.out.println(clazz.getClassLoader());
             // I am DemoObj
             System.out.println(clazz.newInstance().toString());
